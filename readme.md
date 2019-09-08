@@ -6,11 +6,11 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![TopLanguage][toplanguage-shield]][#]
-[![LanguageCount][languagecount-shield]][#]
+[![TopLanguage][toplanguage-shield]][]
+[![LanguageCount][languagecount-shield]][]
+[![License][license-shield]][license-url]
 [![Twitter][twitter-shield]][twitter-url]
 [![Github][githubsocial-shield]][githubsocial-url]
-[![License][license-shield]][license-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -23,13 +23,12 @@
 </p>
 
 
-
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
 * [About](#about)
 * [Talks](#talks)
-  * [Built With](#built-with)
+  * [Reinforcement Learning: How do machines learn?](#reinforcement-learning:-how-do-machines-learn?)
 * [Workshops](#workshops)
 * [Short Courses](#short-courses)
 * [Contact](#contact)
@@ -53,7 +52,7 @@ __Ps.:__ credits are appreciated, but not demanded.
 
 My **Talks** are presentations with the duration of 1-2 hours about some topic I __(supposedly)__ know.
 
-### Reinforcement Learning: How do machines actually learn?
+### Reinforcement Learning: How do machines learn?
 
 * **Date/Place:**  13/09/2019 - EEEP Joaquim Nogueira (Fortaleza-CE, Brazil)
 * **Topics:** machine learning; artificial intelligence; reinforcement learning; dynamical systems; 
@@ -77,7 +76,7 @@ Give me a sec' \ Still uploading...
 
 Hit-me if you need to talk about some of my material, or want to invite-me to your event ;)
 
-Minho Menezes - [@tio.minho](https://twitter.com/tio_minho) - minhotmog@gmail.com
+Minho Menezes - minhotmog@gmail.com - (Twitter) [@tio.minho](https://twitter.com/tio_minho)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
