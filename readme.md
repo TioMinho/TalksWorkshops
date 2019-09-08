@@ -6,8 +6,8 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![TopLanguage][toplanguage-shield]][]
-[![LanguageCount][languagecount-shield]][]
+![TopLanguage][toplanguage-shield]
+![LanguageCount][languagecount-shield]
 [![License][license-shield]][license-url]
 [![Twitter][twitter-shield]][twitter-url]
 [![Github][githubsocial-shield]][githubsocial-url]
@@ -38,35 +38,39 @@
 ## About
 Hello! I'm **Minho** :)
 
-I love talking about science. I am a Computer Engineer and researcher currently living in Brazil. My research topics includes __control theory__, __machine learning__, __dynamical systems__ and a lot of other math and physics related topics.
+I love talking about science. I am a Computer Engineer and researcher currently living in Brazil. My research topics includes _control theory_, _machine learning_, _dynamical systems_ and a lot of other math and physics related topics.
 
-Since these topics are currently __very hot__, I got to be invited to speak about them in several events to several audiences (from high-school to graduate students). Being an [Open Science](https://en.wikipedia.org/wiki/Open_science) advocate, I believe that everything that I do - in that context - should be publicly available. This is the motivation to this repository, in which I will upload the codes/slides of everything I present.
+Since these topics are currently _very hot_, I got to be invited to speak about them in several events to several audiences (from high-school to graduate students). Being an [open science](https://en.wikipedia.org/wiki/Open_science) advocate, I believe that everything that I do - in that context - should be publicly available. This is the motivation to this repository, in which I will upload the codes/slides of everything I present.
 
 Use as your will! Enjoy :)
 
-__Ps.:__ credits are appreciated, but not demanded.
+_Ps.:_ credits are appreciated, but not demanded.
 
 
 <!-- TALKS -->
 ## Talks
 
-My **Talks** are presentations with the duration of 1-2 hours about some topic I __(supposedly)__ know.
+> _Talks_ are presentations with the duration of 1-2 hours about some topic I _~~(supposedly)~~_ know.
 
 ### Reinforcement Learning: How do machines learn?
 
-* **Date/Place:**  13/09/2019 - EEEP Joaquim Nogueira (Fortaleza-CE, Brazil)
-* **Topics:** machine learning; artificial intelligence; reinforcement learning; dynamical systems; 
-* **Description:** A 1-hour introductory presentation about Reinforcement Learning to teenagers students of the Informatics course at the EEEP Joaquim Nogueira public school.
-* **Language:** Portuguese-BR
+* ___Date/Place:___  13/09/2019 - EEEP Joaquim Nogueira (Fortaleza-CE, Brazil)
+* ___Topics:___ machine learning; artificial intelligence; reinforcement learning; dynamical systems; 
+* ___Description:___ A 1-hour introductory presentation about Reinforcement Learning to teenagers students of the Informatics course at the EEEP Joaquim Nogueira public school.
+* ___Language:___ Portuguese-BR
 
 
 <!-- WORKSHOPS -->
 ## Workshops
 
+> _Workshops_ are activities with the duration of 3-4 hours intended to produce some application at the end.
+
 Give me a sec' \ Still uploading... 
 
 <!-- SHORT COURSES -->
 ## Short Courses
+
+> _Short Courses_ are courses with the duration of 6-12 hours in to teach about a specific technology.
 
 Give me a sec' \ Still uploading... 
 
@@ -74,7 +78,7 @@ Give me a sec' \ Still uploading...
 <!-- CONTACT -->
 ## Contact
 
-Hit-me if you need to talk about some of my material, or want to invite-me to your event ;)
+Hit-me if you need to talk about some of my material, or want to invite me to your event ;)
 
 Minho Menezes - minhotmog@gmail.com - (Twitter) [@tio.minho](https://twitter.com/tio_minho)
 
