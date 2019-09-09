@@ -1,0 +1,354 @@
+%-------------------------------------------------------
+%-- PREAMBLE
+%-------------------------------------------------------
+\documentclass[8pt]{beamer}
+\usetheme[]{Feather}
+  
+\setbeamersize{text margin left=0.75cm,text margin right=0.75cm}
+
+% INCLUDE PACKAGES
+%-------------------------------------------------------
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+
+\usepackage{graphicx}
+\graphicspath{ {imgs/} }
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[protrusion=true,expansion=true]{microtype} 
+\usepackage{amsmath,amsfonts,amsthm,amssymb,bm,mathdots,mathtools,bigints}
+\usepackage{color, xcolor}
+\usepackage{listings}
+\usepackage[document]{ragged2e}
+\usepackage{wrapfig}
+\usepackage[printwatermark]{xwatermark}
+\usepackage{subcaption}
+\usepackage{mdframed}
+\usepackage{multicol}
+\usepackage{environ}
+\usepackage{tikz, pgfplots}
+\usepackage{framed}
+
+
+\lstset{
+    backgroundcolor=\color[rgb]{0.86,0.88,0.93},
+    language=matlab, keywordstyle=\color[rgb]{0,0,1},
+    basicstyle=\footnotesize \ttfamily,breaklines=true,
+    escapeinside={\%*}{*)}
+}
+
+% DEFFINING COLORS
+%-------------------------------------------------------
+\definecolor{glgRed}{RGB}{214,45,32}
+\definecolor{glgGreen}{RGB}{0,135,68}
+\definecolor{glgBlue}{RGB}{0,87,231}
+\definecolor{glgOrange}{RGB}{255,167,0}
+
+\definecolor{retroBrown}{RGB}{102,101,71}
+\definecolor{retroRed}{RGB}{251,46,1}
+\definecolor{retroGreen}{RGB}{111,203,159}
+\definecolor{retroYellow}{RGB}{255,226,138}
+
+\definecolor{pastelBlue}{RGB}{27,133,184}
+\definecolor{pastelRed}{RGB}{174,90,65}
+\definecolor{pastelGreen}{RGB}{85,158,131}
+\definecolor{pastelBlack}{RGB}{90,82,85}
+
+\definecolor{niceBlack}{RGB}{14,17,17}
+\definecolor{niceBlue}{RGB}{14,104,206}
+
+\definecolor{monokaiBG}{RGB}{39,40,34}
+\definecolor{monokaiOrange}{RGB}{253,151,31}
+
+\colorlet{signal1}{niceBlack!90}
+\colorlet{signal2}{niceBlack!90}
+\colorlet{signal3}{niceBlack!90}
+\colorlet{signal4}{niceBlack!90}
+
+% Beamer Color Scheme
+\setbeamercolor{Feather}{fg=niceBlack!50, bg=monokaiBG}
+\setbeamercolor{Feathertext}{fg=monokaiOrange}
+\setbeamercolor{structure}{fg=monokaiOrange!95!niceBlack}
+\setbeamercolor{frametitle}{bg=monokaiBG!80}
+\setbeamercolor{normal text}{fg=black!85}
+
+
+% Tikz Macros
+% --------------------------------------------------------------------
+\usetikzlibrary{shapes,arrows, backgrounds, positioning, fit, decorations.pathmorphing}
+
+\tikzstyle{sectionBlock} = [draw, fill=blue!20, rectangle, minimum height=3em, minimum width=3em]
+\tikzstyle{block} = [draw, fill=white, rectangle, minimum height=3em, minimum width=3em]
+\tikzstyle{sum} = [draw, fill=white, circle, node distance=1cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
+\tikzstyle{mcCircle} = [draw, circle, line width=0.5mm, minimum width=3em, minimum height=3em, fill=white]
+\tikzstyle{mcInput} = [draw, rectangle, line width=0.5mm, minimum width=3em, minimum height=3em, fill=black!10]
+\tikzstyle{mcCircleX} = [draw=glgBlue!80, circle, line width=0.75mm, minimum width=3em, minimum height=3em, fill=white]
+\tikzstyle{mcCircleY} = [draw=glgBlue!80, circle, line width=0.75mm, minimum width=3em, minimum height=3em, fill=white]
+
+
+% DEFFINING AND REDEFINING COMMANDS
+%-------------------------------------------------------
+
+% colored hyperlinks
+\newcommand{\chref}[2]{
+  \href{#1}{{\usebeamercolor[bg]{Feather}#2}}
+}
+
+\makeatletter
+\let\beamer@writeslidentry@miniframeson=\beamer@writeslidentry
+\def\beamer@writeslidentry@miniframesoff{%
+  \expandafter\beamer@ifempty\expandafter{\beamer@framestartpage}{}% does not happen normally
+  {%else
+    % removed \addtocontents commands
+    \clearpage\beamer@notesactions%
+  }
+}
+\newcommand*{\miniframeson}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframeson}
+\newcommand*{\miniframesoff}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframesoff}
+\makeatother
+
+\makeatletter
+\patchcmd{\beamer@sectionintoc}
+  {\vfill}
+  {\vskip\itemsep}
+  {}
+  {}
+\makeatother  
+
+% tensor 2:
+\newcommand{\tend}[1]{\hbox{\oalign{$\bm{#1}$\crcr\hidewidth$\scriptscriptstyle\bm{\sim}$\hidewidth}}}
+\newcommand{\tenq}[1]{\hbox{\oalign{$\bm{#1}$\crcr\hidewidth$\scriptscriptstyle\bm{\sim}$\hidewidth}}}
+
+
+% ENVIROMENTS
+%-------------------------------------------------------
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+    \centering
+    \bfseries \Huge \color{monokaiOrange!85} \insertsectionhead\par%
+  \vfill
+  \end{frame}
+}
+
+%\AtBeginSubsection[]{
+%  \begin{frame}
+%  \vfill
+%    \centering
+%    \Huge \color{glgBlue!60} \insertsubsectionhead\par%
+%    \huge \color{niceBlack!85} \insertsectionhead\par%
+%  \vfill
+%  \end{frame}
+%}
+
+\newenvironment<>{varblock}[2][.9\textwidth]{%
+  \setlength{\textwidth}{#1}
+  \begin{actionenv}#3%
+    \def\insertblocktitle{#2}%
+    \par%
+    \usebeamertemplate{block begin}}
+  {\par%
+    \usebeamertemplate{block end}%
+  \end{actionenv}}
+
+\NewEnviron{myequation*}{%
+    \begin{equation*}
+    \scalebox{1.1}{$\BODY$}
+    \end{equation*}
+    }
+    
+% INFORMATION IN THE TITLE PAGE
+%-------------------------------------------------------
+
+\title[Reinforcement Learning: Como as máquinas aprendem?]
+{
+      Reinforcement Learning:\\Como as máquinas aprendem?
+}
+
+\subtitle[]
+{
+}
+
+\author[Minho Menezes]
+{      
+  Minho Menezes\\
+}
+
+\institute[]
+{
+  EEEP Joaquim Nogueira - Fortaleza\\
+  
+  %there must be an empty line above this line - otherwise some unwanted space is added between the university and the country (I do not know why ;( )
+}
+
+\date{\today}
+
+%-------------------------------------------------------
+%-- THE BODY OF THE PRESENTATION
+%-------------------------------------------------------
+
+\begin{document}
+
+%-------------------------------------------------------
+% THE TITLEPAGE
+%-------------------------------------------------------
+
+{ \1
+\begin{frame}[plain,noframenumbering] % the plain option removes the header from the title page, noframenumbering removes the numbering of this frame only
+  \titlepage % call the title page information from above
+\end{frame}}
+
+%-------------------------------------------------------
+% SUMMARY
+%-------------------------------------------------------
+
+\begin{frame}
+  \setcounter{secnumdepth}{1}
+  \setcounter{tocdepth}{1}
+  \begin{center} \Large \bfseries
+    Summary
+  \end{center}
+  \vfill
+    \begin{columns}[t]
+    	\hfill
+        \begin{column}{0.4\textwidth}
+        		\bfseries \large
+            \tableofcontents[sections={1-3}]
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \tableofcontents[sections={4-6}]
+        \end{column}
+        \hfill
+    \end{columns}
+\end{frame}
+
+
+%-------------------------------------------------------
+% SECTION - Introduction
+%-------------------------------------------------------
+\section{Introduction}
+%-------------------------------------------------------
+\subsection{Motivation}
+%-------------------------------------------------------
+\begin{frame}[c]{Introduction}{Contextualization}
+
+\vskip0.25cm
+
+\begin{itemize} \justifying
+  \item<1-> We are discussing the \textbf{optimal control} of \textbf{dynamical systems}. \vskip0.2cm
+  
+  \item<2-> We are discussing \textbf{chemical reaction network systems}, for processes described as:\vskip0.2cm
+  
+\end{itemize}
+
+\end{frame}
+
+%-------------------------------------------------------
+\subsection{Problem Definition}
+%-------------------------------------------------------
+\begin{frame}[t]{Introduction}{Problem Definition}
+
+\begin{center}
+\begin{varblock}[1\textwidth]{} \centering
+
+\end{varblock}
+\end{center} 
+
+\end{frame}
+
+%-------------------------------------------------------
+\begin{frame}[t]{Introduction}{Problem Definition}
+\addtocounter{footnote}{-1}
+
+\vskip0.25cm
+
+\begin{center}
+\begin{varblock}[1\textwidth]{Text} \centering
+  \begin{minipage}{.5\textwidth}
+    {\justifying \bfseries This system...} \vskip0.2cm
+    
+    \begin{itemize} \justifying
+      \item class of system that represents a wide range of industrial applications.\vskip0.2cm
+      
+      \item classical benchmark for multiple-input multiple-output (MIMO) control systems.\vskip0.2cm
+      
+      \item nonlinear behavior, models with non-minimum phase behavior and unmeasurable states.\vskip0.2cm
+    \end{itemize}
+  \end{minipage}
+\end{varblock}
+\end{center}
+
+\end{frame}
+
+
+%-------------------------------------------------------
+%-- End Page
+{\1
+\begin{frame}[plain,noframenumbering]
+  \center \Huge \textbf{\color{monokaiOrange} Thank you!}       
+  
+  \includegraphics[scale=0.4]{corgi.jpg}
+  
+  {\color{monokaiOrange} Questions?}       
+\end{frame}
+
+%-------------------------------------------------------
+\end{document}
+
+
+%%---------------------Rascunho--------------------------
+%\section{Titulo}
+%\subsection{Subtitulo}
+%%---------------------Rascunho--------------------------
+%\begin{frame}{Titulo}{Subtitulo}
+%
+%\begin{block}{title}
+% Say somethings \alert{new} 
+%\end{block}
+%
+%\begin{itemize}
+% \item TikZ\footnote{TikZ is a package for creating beautiful graphics. Have a look at these \chref{http://www.texample.net/tikz/examples/}{online examples} or the \chref{http://tug.ctan.org/tex-archive/graphics/pgf/base/doc/generic/pgf/pgfmanual.pdf}{pgf user manual}.}
+%\end{itemize}
+%
+%\end{frame}
+%%---------------------Rascunho--------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Drafts:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Figure:
+% \begin{figure}[ht]
+%   \centering
+%   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,scale=1]{nameFigure}
+%   \caption{caption of the figure.}
+%   \label{fig:nameFigure}
+% \end{figure} \vskip0.25cm
+%
+%%%%% Equation:
+% \begin{equation*} \label{eq:nameequation*}
+% \begin{split}
+%  X = 1 + 1
+% \end{split}
+% \end{equation*} \vskip0.25cm
+%
+%%%% Table:
+% \begin{table}[hp]
+%   \centering
+%   \begin{tabular}{l | c c }
+%   Principal & Coluna1 & Coluna2 \\
+%   \hline 
+%   ABC & 1 & 2 \\
+%   DFG & 3 & 4 \\
+%   HIJ & 5 & 6 \\
+%   \end{tabular} 
+%   \caption{caption of the table.}
+%   \label{table:nameTable} 
+% \end{table} \vskip0.25cm

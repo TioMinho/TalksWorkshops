@@ -28,7 +28,7 @@
 
 * [About](#about)
 * [Talks](#talks)
-  * [Reinforcement Learning: How do machines learn?](#reinforcement-learning:-how-do-machines-learn?)
+  * [Reinforcement Learning: How do machines learn?](#reinforcement-learning-how-do-machines-learn)
 * [Workshops](#workshops)
 * [Short Courses](#short-courses)
 * [Contact](#contact)
