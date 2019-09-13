@@ -80,6 +80,7 @@
 % Tikz Macros
 % --------------------------------------------------------------------
 \usetikzlibrary{shapes,arrows, backgrounds, positioning, fit, decorations.pathmorphing}
+\usepackage[skins]{tcolorbox}
 
 \tikzstyle{sectionBlock} = [draw, fill=blue!20, rectangle, minimum height=3em, minimum width=3em]
 \tikzstyle{block} = [draw, fill=white, rectangle, minimum height=3em, minimum width=3em]
@@ -170,7 +171,7 @@
 
 \title[Reinforcement Learning: Como as máquinas aprendem?]
 {
-      Reinforcement Learning:\\Como as máquinas aprendem?
+      \textit{Reinforcement Learning}:\\Como as máquinas aprendem?
 }
 
 \subtitle[]
@@ -210,94 +211,338 @@
 % SUMMARY
 %-------------------------------------------------------
 
-\begin{frame}
-  \setcounter{secnumdepth}{1}
-  \setcounter{tocdepth}{1}
-  \begin{center} \Large \bfseries
-    Summary
-  \end{center}
-  \vfill
-    \begin{columns}[t]
-    	\hfill
-        \begin{column}{0.4\textwidth}
-        		\bfseries \large
-            \tableofcontents[sections={1-3}]
-        \end{column}
-        \begin{column}{0.4\textwidth}
-            \tableofcontents[sections={4-6}]
-        \end{column}
-        \hfill
-    \end{columns}
+%\begin{frame}
+%  \setcounter{secnumdepth}{1}
+%  \setcounter{tocdepth}{1}
+%  \begin{center} \Large \bfseries
+%    Simone e Sumário
+%  \end{center}
+%  \vfill
+%    \begin{columns}[t]
+%    	\hfill
+%        \begin{column}{0.4\textwidth}
+%        		\bfseries \large
+%            \tableofcontents[sections={1-3}]
+%        \end{column}
+%        \begin{column}{0.4\textwidth}
+%            \tableofcontents[sections={4-6}]
+%        \end{column}
+%        \hfill
+%    \end{columns}
+%\end{frame}
+
+
+%-------------------------------------------------------
+% SECTION - Apresentação
+%-------------------------------------------------------
+\section{Apresentação}
+%-------------------------------------------------------
+\subsection{Quem é esse cara?}
+%-------------------------------------------------------
+\begin{frame}[c]{Apresentação}{O que tá com teceno?}
+
+\begin{minipage}{\textwidth} \centering
+\begin{minipage}{0.30\textwidth}
+\tikz\node[circle,draw,
+           text=white,
+           minimum width=3.25cm,
+           path picture={
+               \node at (path picture bounding box.center){
+                   \includegraphics[width=\textwidth]{eu}
+               };
+           }]{};
+\end{minipage} \hfill
+\begin{minipage}{0.69\textwidth} \justifying
+{\Large{\textbf{Olá!}} Eu sou o \textbf{Minho}.} 
+
+\begin{itemize}
+	\item[$\leadsto$] Bacharel em Eng. de Computação (UFC, 2019)
+	\item[$\leadsto$] Mestrando em Eng. de Teleinformática (UFC, 2019--)
+\end{itemize}
+
+Sou um pesquisador com especialidade em \textbf{Aprendizagem de Máquina} e \textbf{Teoria do Controle}. \vskip0.25cm
+
+\textbf{Contatos:} \vskip0.1cm
+\begin{tabular}{c c c}
+\begin{tikzpicture}
+	\node (myman) {\includegraphics[width=13px]{email.png}};
+	\node[below=-1mm of myman] {{\color{monokaiOrange!90!black} \bf minhotmog@gmail}};
+\end{tikzpicture}
+&
+\begin{tikzpicture}
+	\node (myman) {\includegraphics[width=13px]{github.png}};
+	\node[below=-1mm of myman] {{\color{monokaiOrange!95!black} \bf @tiominho}};
+\end{tikzpicture}
+&
+\begin{tikzpicture}
+	\node (myman) {\includegraphics[width=13px]{telegram.png}};
+	\node[below=-1mm of myman] {{\color{monokaiOrange!90!black} \bf @katchau}};
+\end{tikzpicture}
+\end{tabular}
+\end{minipage} 
+\end{minipage} 
+
+\vskip.3cm
+\hrule
+\vskip.3cm
+
+Nessa palestra, iremos conversar sobre... \vskip0.1cm
+\begin{varblock}[\textwidth]{} \centering
+	{\bf \Huge Reinforcement Learning}
+\end{varblock}
+
+
 \end{frame}
 
+%-------------------------------------------------------
+\subsection{O que djabo é isso?}
+%-------------------------------------------------------
+\begin{frame}[t]{Apresentação}{} \vskip0.5cm
+
+\begin{itemize}
+	\item[$\leadsto$] Ramo da \textbf{I.A.} que lida com o controle autônomo de \textit{sistemas físicos reais}.
+\end{itemize}
+
+\begin{varblock}[\textwidth]{} \centering
+\begin{tikzpicture}
+	\node (1) [draw, rounded rectangle, fill=white] {\begin{tabular}{c}
+													     Como programamos \\
+													     máquinas para realizar \\
+													     atividades que \\
+													     exigem inteligência?
+													  \end{tabular}};  
+													  
+	\node (2) [draw, right=1cm of 1, rounded rectangle, fill=white] {\begin{tabular}{c}
+													     Como ensinar \\
+													     máquinas a realizar \\
+													     uma atividade \\
+													     específica?
+													  \end{tabular}};  
+
+	\draw [->,thick] (1.north) to [out=15,in=165] (2.north);
+	\draw [->,thick] (2.south) to [out=-165,in=-15] (1.south);
+\end{tikzpicture}
+\end{varblock}
+
+\vskip0.3cm
+\hrule
+\vskip0.3cm
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{examples}
+\end{center}
+
+\end{frame}
 
 %-------------------------------------------------------
-% SECTION - Introduction
+% SECTION - Agente Inteligente
 %-------------------------------------------------------
-\section{Introduction}
+\section{Agentes Inteligentes}
 %-------------------------------------------------------
-\subsection{Motivation}
+\subsection{Anatomia de um Agente}
 %-------------------------------------------------------
-\begin{frame}[c]{Introduction}{Contextualization}
+\begin{frame}[t]{Agentes Inteligentes}{} \vskip0.3cm
 
-\vskip0.25cm
+{\large O elemento principal é o \textbf{Agente Inteligente}.} {\tiny (Também conhecido como ''Sistema Dinâmico'')}
 
-\begin{itemize} \justifying
-  \item<1-> We are discussing the \textbf{optimal control} of \textbf{dynamical systems}. \vskip0.2cm
-  
-  \item<2-> We are discussing \textbf{chemical reaction network systems}, for processes described as:\vskip0.2cm
-  
+\begin{varblock}[\textwidth]{} \centering
+\begin{tikzpicture}
+	\node (1) [draw, circle, fill=white] {\includegraphics[width=30px]{mario}};  	
+	
+	\node (2) [draw, right=3.5cm of 1, rounded rectangle, minimum width=3.5cm, minimum height=2cm, 
+					fill=white, fill overzoom image=marioStage]{};
+													  
+	\draw [->, thick] (1.north) |- node[text width=5cm,xshift=3cm,midway,above,align=center]{{\bf ATUADORES}\\{\small (O agente interage com o ambiente)}} ++(0,0.4) -| (2.north);
+	\draw [->, thick] (2.south) |- node[text width=5cm,xshift=-3cm,midway,below,align=center]{{\bf SENSORES}\\{\small (O agente observa seu estado no ambiente)}} ++(0,-0.4) -| (1.south);
+\end{tikzpicture}
+\end{varblock}
+
+\begin{itemize}
+	\item[$\leadsto$] Está sempre inserido em um \textbf{Ambiente} que influencia um no outro.
+	\item[$\leadsto$] Possui um conjunto de \textbf{ações} e \textbf{estados} possíveis.
+	\item[$\leadsto$] Regidos por \textbf{leis bem definidas} \textit{(leis da física, regras de jogo, etc)}.
+\end{itemize} \vskip0.4cm
+
+\end{frame}
+
+%-------------------------------------------------------
+\subsection{Exemplos}
+%-------------------------------------------------------
+\begin{frame}[t]{Agentes Inteligentes}{} \vskip0.3cm
+
+{\large \textbf{Exemplo:} Pêndulo Invertido} (ou ''\textit{Cartpole}'')
+
+\begin{center}
+	\includegraphics[width=5.5cm]{cartpole_crop}
+\end{center} \vskip-0.6cm
+
+{\Large \begin{equation*}
+\begin{matrix}
+{\color{monokaiOrange} \leadsto} \textbf{ Ações: } \begin{bmatrix} \Leftarrow, & \Rightarrow \end{bmatrix}
+& & & &
+{\color{monokaiOrange} \leadsto} \textbf{ Estados: } \begin{bmatrix} \bm{\theta}, & \bm{x} \end{bmatrix}
+\end{matrix}
+\end{equation*}}
+
+\begin{flushright}
+	\textbf{Spoiler:} vamos ver o Pêndulo\\ aprendendo a se controlar jajá
+\end{flushright}
+
+\end{frame}
+
+%-------------------------------------------------------
+% SECTION - Aprendizagem do Agente
+%-------------------------------------------------------
+\section{Aprendizagem do Agente}
+%-------------------------------------------------------
+\subsection{Controle por Planejamento}
+%-------------------------------------------------------
+\begin{frame}[t]{Aprendizagem do Agente}{} \vskip0.3cm
+
+\begin{center}
+	{\large O nosso Agente é {\color{monokaiBG} \textbf{ONISCIENTE}}.}
+\end{center} \vskip0.2cm
+
+{{\bf \color{monokaiOrange} CONTROLE POR PLANEJAMENTO}}
+\begin{varblock}[\textwidth]{}
+\begin{enumerate}
+	\item Informamos ao Agente seu \textbf{estado de partida} e o seu \textbf{estado objetivo} \vskip0.2cm
+	
+	\item O Agente calcula uma \textbf{trajetória} $\leadsto$ (uma série de ações) \vskip0.2cm
+	
+	\item O Agente começa a aplicar sua \textbf{Lei de Controle} e recalcula a trajetória se houver algum desvio do que foi planejado \vskip0.2cm
+\end{enumerate}
+\end{varblock} \vskip0.3cm
+
+\begin{minipage}{\textwidth} \centering
+\begin{minipage}{.48\textwidth}
+{\bf \color{retroGreen} Vantagens:}
+\begin{itemize}
+	\item Controle da melhor qualidade possível
+	\item Algoritmos rápidos e implementáveis em chip
+\end{itemize}
+\end{minipage} \hfill
+\begin{minipage}{.48\textwidth}
+{\bf \color{retroRed} Desvantagens:}
+\begin{itemize}
+	\item Necessidade de \textbf{Modelos Dinâmicos}
+	\item Altamente complexo para o programador
+\end{itemize}
+\end{minipage}
+\end{minipage}
+
+\vskip0.3cm
+\textbf{Alguns algoritmos...}
+\begin{itemize}
+	\item[$\leadsto$] LQR, LQG, MPC, NMPC, iLQR, LoopShaping, DynamicProgramming, SMC, IPM, ...
+\end{itemize}
+
+\vfill
+\begin{flushright}
+	\includegraphics[width=1.5cm]{pikachu}
+\end{flushright} 
+
+\end{frame}
+
+%-------------------------------------------------------
+\begin{frame}[t]{Aprendizagem do Agente}{} \vskip0.3cm
+
+{\large \textbf{Modelos Dinâmicos} não são simples...}\\
+{\tiny na verdade, essa é uma das maiores áreas de TODA a ciência}
+
+\begin{center}
+	\includegraphics[width=5cm]{cartpole_crop}
+\end{center} \vskip-0.6cm
+
+{\small \begin{align*}
+& {\color{monokaiOrange} \leadsto} \textbf{ Modelo: } \begin{bmatrix} \ddot{x} &=& \cfrac{2a}{2-m a cos^2(\theta)} \left( m l \theta^2 sin(\theta) - 0.5 m g cos(\theta) sin(\theta) + u - f_c(\dot{x}) + \cfrac{1}{2l} cos(\theta) d_{Mf} \dot{\theta} \right) \\
+\ddot{\theta} &=& \cfrac{1}{2l-m l a cos^2(\theta)} \left( g sin(\theta) - m l a \dot{\theta} cos(\theta) + a cos(\theta)(u - f_{c}(\dot{x})) - \cfrac{d_{Mf} \dot{\theta}}{m l} \right) \end{bmatrix}
+\\
+& {\color{monokaiOrange} \leadsto} \textbf{ Ação->Estado: } x(t) = e^{At} x(t_0) + \int_{0}^{t} e^{A(t-\tau)} B u(\tau) d\tau
+\end{align*}}
+
+\end{frame}
+
+%-------------------------------------------------------
+\subsection{Controle por Recompensa}
+%-------------------------------------------------------
+\begin{frame}[t]{Aprendizagem do Agente}{} \vskip0.3cm
+
+\begin{center}
+	{\large O nosso Agente é {\color{monokaiBG} \textbf{MOTIVADO}}.}
+\end{center} 
+
+{{\bf \color{monokaiOrange} CONTROLE POR RECOMPENSA}}
+\begin{varblock}[\textwidth]{}
+\begin{enumerate}
+	\item Criamos um \textbf{Sistema de Recompensas} para o Agente \vskip0.2cm
+	
+	\item O Agente verifica seu estado e... 
+	\begin{itemize}
+		\item \textit{(Exploração)} Tenta fazer uma ação que tenha \textbf{boa recompensa}, ou
+		\item \textit{(Exploitação)} Faz qualquer ação \textbf{aleatória}
+	\end{itemize}\vskip0.2cm
+	
+	\item Se a ação der recompensa, memoriza a relação (Estado $\rightarrow$ Ação) como boa. \vskip0.2cm
+	
+	\item Repete o processo até o Agente aprender todas as relações, ou você perder a paciência. \vskip0.2cm
+\end{enumerate}
+\end{varblock} \vskip0.2cm
+
+\begin{minipage}{\textwidth} \centering
+\begin{minipage}{.48\textwidth}
+{\bf \color{retroGreen} Vantagens:}
+\begin{itemize}
+	\item Não precisa de modelos, só de treino
+	\item Simula a forma como seres humanos aprendem
+\end{itemize}
+\end{minipage} \hfill
+\begin{minipage}{.48\textwidth}
+{\bf \color{retroRed} Desvantagens:}
+\begin{itemize}
+	\item Treinamento é demorado e caro
+	\item O resultado dificilmente será perfeito
+\end{itemize}
+\end{minipage}
+\end{minipage}
+
+\vskip0.2cm
+\textbf{Alguns algoritmos...}
+\begin{itemize}
+	\item[$\leadsto$] Q-Learning, TD, SARSA, ADP, E2ERL, Policy Gradients, DeepQN, ...
 \end{itemize}
 
 \end{frame}
 
 %-------------------------------------------------------
-\subsection{Problem Definition}
-%-------------------------------------------------------
-\begin{frame}[t]{Introduction}{Problem Definition}
+\begin{frame}[t]{Aprendizagem do Agente}{} \vskip0.3cm
+
+{\large {\bf \color{monokaiOrange} Redes Neurais:} codificação biológica de {\it (Atuadores, Sensores)}}
+
+\vfill
 
 \begin{center}
-\begin{varblock}[1\textwidth]{} \centering
-
-\end{varblock}
-\end{center} 
-
-\end{frame}
-
-%-------------------------------------------------------
-\begin{frame}[t]{Introduction}{Problem Definition}
-\addtocounter{footnote}{-1}
-
-\vskip0.25cm
-
-\begin{center}
-\begin{varblock}[1\textwidth]{Text} \centering
-  \begin{minipage}{.5\textwidth}
-    {\justifying \bfseries This system...} \vskip0.2cm
-    
-    \begin{itemize} \justifying
-      \item class of system that represents a wide range of industrial applications.\vskip0.2cm
-      
-      \item classical benchmark for multiple-input multiple-output (MIMO) control systems.\vskip0.2cm
-      
-      \item nonlinear behavior, models with non-minimum phase behavior and unmeasurable states.\vskip0.2cm
-    \end{itemize}
-  \end{minipage}
-\end{varblock}
+	\includegraphics[width=0.85\textwidth]{natureDQN}
 \end{center}
 
 \end{frame}
 
+%-------------------------------------------------------
+% SECTION - ! Showcase !
+%-------------------------------------------------------
+\section{! Showcase !}
+%-------------------------------------------------------
 
+%-------------------------------------------------------
 %-------------------------------------------------------
 %-- End Page
 {\1
 \begin{frame}[plain,noframenumbering]
-  \center \Huge \textbf{\color{monokaiOrange} Thank you!}       
+  \center \Huge \textbf{\color{monokaiOrange} Muito obrigado!}       
   
   \includegraphics[scale=0.4]{corgi.jpg}
   
-  {\color{monokaiOrange} Questions?}       
+  {\color{monokaiOrange} Perguntas?}       
 \end{frame}
 
 %-------------------------------------------------------
